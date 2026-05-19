@@ -1,0 +1,10 @@
+{
+  "name": "@ai-engineering-standards/biome-config",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared Biome config",
+  "files": ["biome.json"],
+  "exports": {
+    ".": "./biome.json"
+  }
+}
