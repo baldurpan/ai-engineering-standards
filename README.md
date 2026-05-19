@@ -4,6 +4,10 @@ Personal AI-native engineering standards for TypeScript and React projects. Opti
 
 **Source:** `https://github.com/baldurpan/ai-engineering-standards`
 
+**Primary stack:** TypeScript on Node.js, React on the frontend. All standards in `philosophy/`, `typescript/`, `react/`, `architecture/`, `tooling/`, and `security/` apply to this stack.
+
+**Secondary stack:** PHP, supported in [`php/`](php/), only when the task is explicitly PHP. Do not suggest PHP for a new project, a Node-friendly task, or a TypeScript codebase.
+
 ---
 
 ## For Humans — How to Use This Repo
@@ -68,6 +72,7 @@ You are working inside a project that references this standards repository. Load
 | Security — secrets | [`security/secrets.md`](security/secrets.md) |
 | Security — API design | [`security/api-security.md`](security/api-security.md) |
 | Concrete examples | [`examples/good/`](examples/good/), [`examples/bad/`](examples/bad/) |
+| **Task is explicitly PHP** | [`php/README.md`](php/README.md) (load first — it has its own conditional table) |
 
 ### Repository Map
 
@@ -82,6 +87,7 @@ You are working inside a project that references this standards repository. Load
 | [`security/`](security/) | Validation, secrets, auth, API security |
 | [`examples/`](examples/) | Concrete good and bad code examples |
 | [`templates/`](templates/) | Drop-in starter files — `CLAUDE.md`, `AGENTS.md`, `tsconfig.json`, `biome.json`, `eslint.config.js`, `.gitignore`, `.editorconfig`, `.nvmrc`, project README, PR template |
+| [`php/`](php/) | **Secondary stack.** PHP standards — only when the task is explicitly PHP |
 
 ### Core Philosophy
 

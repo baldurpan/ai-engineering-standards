@@ -2,6 +2,23 @@
 
 Rules for AI agents (Claude Code, Cursor, Continue, Copilot, etc.) working within a codebase governed by these standards.
 
+## Stack Selection
+
+The primary stack is **TypeScript on Node.js with React on the frontend**. Default to this stack for:
+
+- New projects
+- New services or modules
+- Greenfield features
+- Any task where the language is not already chosen
+
+**PHP standards exist in [`../php/`](../php/) but are secondary.** Load and apply them only when:
+
+- The user explicitly asks for PHP
+- You are working inside an existing PHP codebase
+- The task involves modifying a PHP file
+
+Do not propose rewriting a Node/TypeScript codebase in PHP. Do not suggest PHP as an alternative to JavaScript/TypeScript "for performance" or "for simplicity." If the user has not specified PHP, they want TypeScript.
+
 ## PRIORITIZE
 
 - Readability
