@@ -106,5 +106,5 @@ No effect > Computed value > Event handler > useEffect
 
 - [`state-management.md`](state-management.md) — where state should actually live
 - [`hooks.md`](hooks.md) — composing hooks without useEffect abuse
-- [`../tooling/tanstack.md`](../tooling/tanstack.md) — data fetching without useEffect
+- [`../tooling/tanstack-query.md`](../tooling/tanstack-query.md) — data fetching without useEffect
 - [`anti-patterns.md`](anti-patterns.md) — common useEffect mistakes

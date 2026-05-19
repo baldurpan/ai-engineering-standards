@@ -52,7 +52,9 @@ You are working inside a project that references this standards repository. Load
 | Monorepo work | [`architecture/monorepos.md`](architecture/monorepos.md) |
 | API client / contract design | [`architecture/api-design.md`](architecture/api-design.md) |
 | Date / time / timezone handling | [`tooling/dates.md`](tooling/dates.md) |
-| Tooling — TanStack | [`tooling/tanstack.md`](tooling/tanstack.md) |
+| Tooling — TanStack (overview) | [`tooling/tanstack.md`](tooling/tanstack.md) |
+| Tooling — TanStack Router (deep) | [`tooling/tanstack-router.md`](tooling/tanstack-router.md) |
+| Tooling — TanStack Query (deep) | [`tooling/tanstack-query.md`](tooling/tanstack-query.md) |
 | Tooling — Vite | [`tooling/vite.md`](tooling/vite.md) |
 | Tooling — Biome | [`tooling/biome.md`](tooling/biome.md) |
 | Tooling — Tailwind | [`tooling/tailwind.md`](tooling/tailwind.md) |

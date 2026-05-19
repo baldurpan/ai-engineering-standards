@@ -41,11 +41,16 @@ export function InvoicesPage() {
 
 ## Where to Place Boundaries
 
-Place boundaries at meaningful UI seams — typically:
+Place boundaries at meaningful UI seams. There are two layers:
 
-- Around each route / page
-- Around independent feature widgets that can fail independently
-- Around any subtree that suspends (lazy-loaded routes, suspended queries)
+**Route-level** — use TanStack Router's `errorComponent` and `pendingComponent` for failures and loading during route transitions (loader runs, then renders). See [`../tooling/tanstack-router.md`](../tooling/tanstack-router.md).
+
+**Component-level** — use `<ErrorBoundary>` and `<Suspense>` for independent widgets within a page that can fail or load separately from the route as a whole.
+
+Typical layout:
+- One route-level `errorComponent` per route
+- Component-level boundaries around independent widgets (dashboard panels, charts, third-party embeds)
+- One component-level boundary around any subtree that suspends independently of the route loader
 
 ```tsx
 // Multiple boundaries — one failing widget doesn't kill the dashboard
@@ -180,4 +185,11 @@ See [`tooling/observability.md`](../tooling/observability.md) for error monitori
 Co-located boundaries > Single global boundary
 Specific error UI > Generic fallback
 Suspense + ErrorBoundary together > Either alone
+Route-level errorComponent (route transitions) > Component-level ErrorBoundary (widgets)
 ```
+
+## See Also
+
+- [`../tooling/tanstack-router.md`](../tooling/tanstack-router.md) — route-level `pendingComponent` / `errorComponent`
+- [`../tooling/tanstack-query.md`](../tooling/tanstack-query.md) — `useSuspenseQuery` for component-level boundaries
+- [`../tooling/observability.md`](../tooling/observability.md) — reporting caught errors to monitoring

@@ -1,129 +1,31 @@
 # TanStack
 
-## TanStack Query
+The TanStack family is the preferred toolkit for routing, server state, and forms.
 
-The default solution for server state management. Replaces manual `useEffect` + `useState` data fetching entirely.
+| Library | Doc | Purpose |
+|---|---|---|
+| TanStack Router | [`tanstack-router.md`](tanstack-router.md) | Type-safe routing, loaders, typed search params |
+| TanStack Query | [`tanstack-query.md`](tanstack-query.md) | Server state, caching, mutations |
+| TanStack Form | [`../react/forms.md`](../react/forms.md) | Type-safe form state with schema validation |
 
-### Key Patterns
+## Why TanStack
 
-```ts
-// Query
-const { data, isLoading, error } = useQuery({
-  queryKey: ["invoices", filters],
-  queryFn: () => fetchInvoices(filters),
-  staleTime: 30_000,       // data stays fresh for 30s
-  gcTime: 5 * 60 * 1000,  // cache kept for 5 minutes after unmount
-});
+- Each library is independent but composes cleanly with the others
+- Type inference flows end-to-end — fewer hand-typed DTOs
+- Schema validation (Zod) provides a consistent backbone across router, query, and form
+- Router + Query together eliminate loading flicker on navigation — see [`tanstack-router.md`](tanstack-router.md)
 
-// Mutation with optimistic update
-const { mutate } = useMutation({
-  mutationFn: createInvoice,
-  onMutate: async (newInvoice) => {
-    await queryClient.cancelQueries({ queryKey: ["invoices"] });
-    const previous = queryClient.getQueryData(["invoices"]);
-    queryClient.setQueryData(["invoices"], (old: Invoice[]) => [...old, newInvoice]);
-    return { previous };
-  },
-  onError: (_, __, context) => {
-    queryClient.setQueryData(["invoices"], context?.previous);
-  },
-  onSettled: () => {
-    queryClient.invalidateQueries({ queryKey: ["invoices"] });
-  },
-});
-```
+## When All Three Compose
 
-### Query Key Conventions
+A typical data flow uses all three:
 
-Use arrays. Nest from general to specific:
-
-```ts
-["invoices"]                    // all invoices
-["invoices", { status: "open" }] // invoices with filters
-["invoices", "123"]             // specific invoice
-["invoices", "123", "comments"] // nested resource
-```
-
-### Setup
-
-```tsx
-// app/providers.tsx
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60_000,
-      retry: 1,
-    },
-  },
-});
-
-export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
-  );
-}
-```
-
----
-
-## TanStack Router
-
-Type-safe routing with first-class search param support.
-
-### Key Patterns
-
-```ts
-// Typed search params
-const invoiceRoute = createRoute({
-  path: "/invoices",
-  validateSearch: z.object({
-    status: z.enum(["all", "open", "paid"]).default("all"),
-    page: z.number().int().positive().default(1),
-  }),
-});
-
-// Using search params in a component
-const { status, page } = useSearch({ from: "/invoices" });
-const navigate = useNavigate();
-
-const setStatus = (status: string) =>
-  navigate({ search: (prev) => ({ ...prev, status }) });
-```
-
----
-
-## TanStack Form
-
-Type-safe form state management with schema validation.
-
-### Key Patterns
-
-```tsx
-const form = useForm({
-  defaultValues: { title: "", amount: 0 },
-  validatorAdapter: zodValidator(),
-  validators: { onChange: createInvoiceSchema },
-  onSubmit: async ({ value }) => {
-    await createInvoice(value);
-  },
-});
-```
-
-See [react/forms.md](../react/forms.md) for full examples.
-
----
-
-## DO NOT
-
-- Mix TanStack Query with manual `useEffect` fetch patterns
-- Store server state in Zustand or Context
-- Use TanStack Query for pure local UI state
+1. **Router** loads data in a `loader` via `queryClient.ensureQueryData`
+2. **Query** caches it; components consume it via `useSuspenseQuery`
+3. **Form** mutations call `queryClient.invalidateQueries` after submission
+4. The Router navigates to the next route, which may already be prefetched
 
 ## See Also
 
-- [`../react/state-management.md`](../react/state-management.md) — state hierarchy
+- [`../react/state-management.md`](../react/state-management.md) — state hierarchy (URL > server > local > context)
 - [`../react/forms.md`](../react/forms.md) — TanStack Form patterns
-- [`../architecture/api-design.md`](../architecture/api-design.md) — API client patterns
-- [`../react/use-effect.md`](../react/use-effect.md) — why not useEffect for fetching
+- [`../architecture/api-design.md`](../architecture/api-design.md) — API contracts that feed these libraries

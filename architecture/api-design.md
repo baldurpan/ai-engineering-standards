@@ -208,4 +208,5 @@ Mock-first frontend > Blocked-on-backend frontend
 - [`typescript/validation.md`](../typescript/validation.md) — schema-driven validation
 - [`security/api-security.md`](../security/api-security.md) — status codes, rate limiting, CORS
 - [`security/validation.md`](../security/validation.md) — input validation at boundaries
-- [`tooling/tanstack.md`](../tooling/tanstack.md) — TanStack Query patterns
+- [`tooling/tanstack-query.md`](../tooling/tanstack-query.md) — TanStack Query patterns
+- [`tooling/tanstack-router.md`](../tooling/tanstack-router.md) — route loaders, typed search params

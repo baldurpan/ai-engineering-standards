@@ -143,5 +143,5 @@ Schema validation > Controlled inputs > Optimistic updates
 
 - [`../typescript/validation.md`](../typescript/validation.md) — Zod schema patterns
 - [`accessibility.md`](accessibility.md) — labels, errors, keyboard support
-- [`../tooling/tanstack.md`](../tooling/tanstack.md) — TanStack Form + Query
+- [`../tooling/tanstack-query.md`](../tooling/tanstack-query.md) — mutations and cache invalidation
 - [`../tooling/shadcn.md`](../tooling/shadcn.md) — shadcn/ui form components

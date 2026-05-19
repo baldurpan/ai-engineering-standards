@@ -15,15 +15,22 @@ Choose the simplest state mechanism that works. Escalate only when necessary.
 
 ## URL State
 
-Prefer URL state for anything that should be shareable or bookmarkable:
+Prefer URL state for anything that should be shareable, bookmarkable, or survive a refresh:
 
 - Filters, search queries, pagination, selected tab
-- Use TanStack Router's typed search params or `URLSearchParams`
+- Use TanStack Router's typed search params (validated with Zod)
 
 ```ts
 // TanStack Router — typed search params
-const { search, setSearch } = useSearch({ from: "/invoices" });
+const search = invoicesRoute.useSearch();
+const navigate = invoicesRoute.useNavigate();
+
+function setStatus(status: InvoiceStatus) {
+  navigate({ search: (prev) => ({ ...prev, status, page: 1 }) });
+}
 ```
+
+See [`../tooling/tanstack-router.md`](../tooling/tanstack-router.md) for the full pattern (route definition, validation, loaders).
 
 ## Server State — TanStack Query
 
@@ -109,7 +116,8 @@ URL state > Server state > Local state > Context > Zustand
 
 ## See Also
 
-- [`../tooling/tanstack.md`](../tooling/tanstack.md) — TanStack Query/Router/Form patterns
+- [`../tooling/tanstack-router.md`](../tooling/tanstack-router.md) — typed URL state, loaders
+- [`../tooling/tanstack-query.md`](../tooling/tanstack-query.md) — server state cache
 - [`use-effect.md`](use-effect.md) — what useEffect is and isn't for
 - [`forms.md`](forms.md) — form state management
 - [`hooks.md`](hooks.md) — composing hooks for stateful logic
