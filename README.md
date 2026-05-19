@@ -79,8 +79,7 @@ You are working inside a project that references this standards repository. Load
 | [`tooling/`](tooling/) | TanStack, Nx, Vite, Biome, Tailwind, shadcn, Prisma |
 | [`security/`](security/) | Validation, secrets, auth, API security |
 | [`examples/`](examples/) | Concrete good and bad code examples |
-| [`templates/`](templates/) | Drop-in `CLAUDE.md`, `AGENTS.md`, README, and PR templates |
-| [`packages/`](packages/) | Reusable npm configs (tsconfig, biome-config, eslint-config) |
+| [`templates/`](templates/) | Drop-in starter files — `CLAUDE.md`, `AGENTS.md`, `tsconfig.json`, `biome.json`, `eslint.config.js`, `.gitignore`, `.editorconfig`, `.nvmrc`, project README, PR template |
 
 ### Core Philosophy
 

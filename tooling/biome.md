@@ -18,15 +18,7 @@ pnpm add --save-dev --save-exact @biomejs/biome
 pnpm biome init
 ```
 
-Or extend the shared config from this repo:
-
-```json
-// biome.json
-{
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "extends": ["@ai-engineering-standards/biome-config"]
-}
-```
+Or copy [`templates/biome.json`](../templates/biome.json) into your project as a starting point.
 
 ## Key Commands
 
@@ -76,7 +68,7 @@ Enable format on save:
 
 ## Config Reference
 
-See [packages/biome-config/biome.json](../packages/biome-config/biome.json) for the full shared config.
+See [`templates/biome.json`](../templates/biome.json) for the canonical Biome config.
 
 ## Migrating from ESLint + Prettier
 

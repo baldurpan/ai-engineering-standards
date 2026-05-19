@@ -1,4 +1,5 @@
 // @ts-check
+// Fallback for projects not using Biome. Biome is the recommended single tool (see tooling/biome.md).
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import jsxA11y from "eslint-plugin-jsx-a11y";
